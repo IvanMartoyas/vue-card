@@ -1,0 +1,51 @@
+npm run serve
+
+ ( ) Babel
+ ( ) TypeScript
+ ( ) Progressive Web App (PWA) Support        
+>(*) Router
+ (*) Vuex
+ (*) CSS Pre-processors
+ (*) Linter / Formatter
+ ( ) Unit Testing
+ ( ) E2E Testing
+
+прекрыть все базовые стили своими, взять их с афк система 
+
+npm install bootstrap --save--dave
+
+red #800d0d
+
+ПРИ УСТАНОВКЕ ПЛАГИНОВ ЧАСТО ВОЗНИКАЮТ ПРОБЛЕМЫ И ПИШЕТСЯ ОШИБКА, НО VUE ВРЁТ В ЭТОМ ВОПРОСЕ
+ДЛЯ ЕЁ УСТРАНЕНИЯ ПОПРОБУЙ
+1 УСТАНОВИТЬ ПЛАГИН БЕЗ --SAVE И --SAVE--DAVE К ПРИМЕРУ НЕ npm install bootstrap --save--dave, А npm install bootstrap (БЫЛА ОШИБКА С ВАЛИДАТОРОМ ЭТО ПОМОГЛО И В РЯДЕ ДРУГИХ СИТУАЦИЙ ТОЖЕ)
+2 ПРОВЕРЬ ПРАВИЛЬНОСТЬ НАПИСАННОГО КОДА
+3 
+
+
+
+настройка шрифтов для vue
+@font-face {
+  font-family: 'Geometria';
+  src: local('Geometria Thin'), local('Geometria-Thin'),
+    url('~@/assets/fonts/geometria/Geometria-Thin.woff') format('woff'),
+    url('~@/assets/fonts/geometria/Geometria-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+}
+
+
+анимации
+
+фон
+https://pt-blog.ru/21-velikolepnyj-effekt-animacii-bekgraunda-fona-sajta/
+ 
+статьи
+https://codepen.io/zrichard/pen/wEFBd
+
+
+
+
+
+
+' width:'+  width +'; height:'+ height_slider + '

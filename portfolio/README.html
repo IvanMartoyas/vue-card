@@ -1,0 +1,27 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.md</title>
+      </head>
+      <body>
+        <h1 id="portfolio">portfolio</h1>
+          <h2 id="project-setup">Project setup</h2>
+          <pre><code>npm install
+          </code></pre><h3 id="compiles-and-hot-reloads-for-development">Compiles and hot-reloads for development</h3>
+          <pre><code>npm run serve
+          </code></pre><h3 id="compiles-and-minifies-for-production">Compiles and minifies for production</h3>
+          <pre><code>npm run build
+          </code></pre><h3 id="lints-and-fixes-files">Lints and fixes files</h3>
+          <pre><code>npm run lint
+          </code></pre><h3 id="customize-configuration">Customize configuration</h3>
+          <p>See <a href="https://cli.vuejs.org/config/">Configuration Reference</a>.</p>
+          <p>Ошибки
+          Не работал body-parser, оказалось что его нужно было подключать самым первым модулем после самого express</p>
+          <p> is defined but never used  no-unused-vars значит что созданная переменна или функция негде не используется
+          чтобы убрать ошибку нужно припесать коментарий перед этой строчкой или в ней после кода ===&gt; (// eslint-disable-line no-unused-vars)</p>
+          <p>no-useless-catch значит что catch просто написан и ниначто не влияет, тем самым раздувая код который не используется у затрудняет его рефакторинг</p>
+          <p>выводить в обратном порядке
+          v-for=&quot;(item, i) in data_posts.slice().reverse()&quot;</p>
+
+      </body>
+    </html>
