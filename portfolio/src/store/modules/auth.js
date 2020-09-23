@@ -18,6 +18,7 @@ export default {
             try{ 
                 await firebase.auth().signInWithEmailAndPassword(email, password);
                 await this.$store.dispatch('fetchUser');
+                location.reload();
             }
             catch(e) {// eslint-disable-line no-useless-catch
                 commit('setError', e);
@@ -55,19 +56,30 @@ export default {
                 throw new Error(e);
             }
         },
-        getUserId() {// возвращает id(Uid) пользователя который залогинен
-            const user = firebase.auth().currentUser;// обращаемся к auth это модуль авторизации и достоём зареганого юзера
+        async getUserId() {// возвращает id(Uid) пользователя который залогинен
+            const user = await firebase.auth().currentUser;// обращаемся к auth это модуль авторизации и достоём зареганого юзера
             return user ? user.uid : null// если пользователь залогинен то вернёт его id, если нет то вернёт null
         },
         async getUserList() {
             const data = await firebase.database().ref(`/users/`);
             return data;
         },
-        async Logout(commit) {
+        async getUserData({commit}) {
             try {
+                return await firebase.auth().currentUser;
+            }
+            catch(e) {
+                commit('setError', e);
+            }
+        },
+        async Logout({commit, getters}) {
+            try {
+
                 await firebase.auth().signOut();
-                router.push({ path: '/' })
-                commit("clearUserInfo");
+                router.push({ path: '/home' })
+
+        
+                commit('clearUserInfo');// LogOut from firebase
             }
             catch(e) {
                 commit('setError', e);

@@ -3,24 +3,29 @@
    <form @submit.prevent="submitCreatePost" ref="form_create_post"  method="post" enctype="multipart/form-data" class="card form_search_post">
         <div class="form-group">
             <label for="title1">Заголовок</label>
-            <input type="text" class="form-control" id="title1" v-model="form.title"  name="title" >
+            <input type="text" class="form-control" id="title1" v-model.lazy="$v.title.$model" name="title" >
+
+            <small  class="btn form-text bg-danger text-light" v-if="$v.title.$dirty && !$v.title.required">Введите заголовок.</small>
         </div>
         <div class="form-group">
             <label for="quote1">Цитата</label>
-            <input type="text" class="form-control"  v-model="form.quote" name="quote" id="quote1"/>
+            <input type="text" class="form-control" v-model.lazy="$v.quote.$model" name="quote" id="quote1"/>
+
+            <small  class="btn form-text bg-danger text-light" v-if="$v.quote.$dirty && !$v.quote.required">Укажите цитату цитату.</small>
+            <small  class="btn form-text  bg-danger text-light" v-else-if="$v.quote.$dirty && !$v.quote.minLength">Цитата должна состоять минимум из 20 символов.</small>
         </div>
         <div class="form-group">
             <label for="Kontent1">Контент</label>
-            <textarea type="text" class="form-control"  v-model="form.content" name="content" id="Kontent1">
+            <textarea type="text" class="form-control" v-model.lazy="$v.content.$model" name="content" id="Kontent1">
             </textarea>
-        </div>
-        <div class="form-group">
-            <label for="KeyWord1">Ключевые слова</label>
-            <input type="text" class="form-control"  v-model="form.keyWord" name="keyword" id="KeyWord1"/>
+
+            <small  class="btn form-text bg-danger text-light" v-if="$v.content.$dirty && !$v.content.required">Введите контент поста.</small>
         </div>
         <div class="form-group">
             <label for="File1">Выберите фото </label>
-            <input type="file" class="form-control-file"  @change="onFileChange" name="file" id="File1"/>
+            <input  class="form-control-file"  @change="onFileChange" v-model.lazy="$v.file.$model" name="file" id="File1"/>
+            
+            <small  class="btn form-text bg-danger text-light" v-if="$v.file.$dirty && !$v.file.required">Введите изображение.</small>
         </div>
         <button type="submit" class="btn botton--green">Отправить</button>
     </form>
@@ -34,38 +39,69 @@
     // import FormData from 'form-data'
     // import router from '@/router/index'
     // import _ from "lodash"
+    import { email, required, minLength } from 'vuelidate/lib/validators'
 
-  export default {
-    data() {
-      return {
-        form: {
-            title: '',
-            quote: '',
-            content: '',
-            keyWord: '',
-            file: ''
-        },
-        valid: false,
-        errors: {
-            mail: "",
-            password: ""
+    export default {
+        data() {
+            return {
+                title: '',
+                quote: '',
+                content: '',
+                file: ''
         }
-      }
     },
-    props: {
-       data_posts: {},
+    validations: {
+        title: {
+          required
+        },
+        quote: {
+          required,  
+          minLength: minLength(20)       
+        },
+        content: {
+          required
+        },
+        file: {
+            required, 
+        }
     },
     methods: {
         onFileChange(e) {
-
-        let files = e.target.files || e.dataTransfer.files;
-        if (!files.length)
-            return;
-        // console.log("files "+files[0])
-        this.form.file = files[0]
-        console.log("file_size "+this.form.file.name )
+            // load image
+            let files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return;
+            // console.log("files "+files[0])
+            this.form.file = files[0]
+            console.log("file_size "+this.form.file.name )
         }, 
+        entrance_registration() {
+            this.$emit('entrance_registration', false);
+        },
         async submitCreatePost() {
+            if(this.$v.$invalid) {
+                this.$v.$touch();
+                return
+            }
+            else {
+                try{ 
+                    let post = await this.$store.dispatch("createPost", {
+                        title: this.title,
+                        quote: this.quote,
+                        content: this.content,
+                        file: this.file
+                    });
+
+                    this.title = '';
+                    this.quote =  '';
+                    this.content =  '';
+                    this.file =  '';
+                    this.$v.reset();
+                }
+                catch(e) {
+                    console.log("errorl create post: "+ e);
+                }
+            }
 
             // let formData = new FormData();
 
@@ -75,10 +111,7 @@
             // formData.append("content", this.form.content)
             // formData.append("keyWord", this.form.keyWord)
             // formData.append('file', this.form.file) 
-
-
-            console.log( "click")
-
+            // console.log( "click")
                 // try {
                 //     axios({
                 //         method: 'post',
@@ -125,7 +158,7 @@
 
         }
     }
-  }
+}
 </script>
 
 <style>

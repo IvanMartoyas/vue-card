@@ -8,7 +8,7 @@
         <b-navbar-nav>
             <b-nav-item ><router-link to="/" class="navbar_a">Главная</router-link></b-nav-item>
             <b-nav-item ><router-link to="/about"   class="navbar_a">О мне</router-link> </b-nav-item>
-            <b-nav-item ><router-link to="/Portfolio" class="navbar_a">Портфолио</router-link></b-nav-item>
+            <b-nav-item ><router-link to="/Article" class="navbar_a">Статьи</router-link></b-nav-item>
             <b-nav-item ><router-link to="/contact" class="navbar_a">Контакты</router-link></b-nav-item>
             <b-nav-item v-if="name"><router-link to="/Auth" class="navbar_a" >Личный кабинет </router-link></b-nav-item>
         </b-navbar-nav>
@@ -68,7 +68,10 @@
 
         computed: {// будет реагировать на любое изменнение getters в vuex
             name() {
-                return this.$store.getters.getUserInfo.name
+             
+                    return this.$store.getters.getUserInfo.name;
+              
+                 
             }
         },
         methods: {
@@ -80,11 +83,11 @@
                 this.$store.dispatch('Logout');
             }
         },
-        // watch: {
-        //     name() {
-        //         return this.$store.getters.user_info
-        //     }
-        // }
+        watch: {
+            name() {
+                return this.$store.getters.getUserInfo.name
+            }
+        }
     }
 </script>
 

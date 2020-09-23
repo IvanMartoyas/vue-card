@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-
+    {{  "show info name "+ this.$store.getters.getUserInfo.name }}
+    {{ "show info  "+ this.$store.getters.getUserInfo }}
+    {{"dispatch "+  this.$store.dispatch("getUserId")}}
         <div class="container">
             <div class="row">
                 <div class="card" >

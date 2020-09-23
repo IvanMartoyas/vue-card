@@ -31,9 +31,6 @@ import Post_edit from './post_component/Post_edit'
           vews_component: 'create'
       }
     },
-    props: {
-       data_posts: {},
-    },
     methods: {
         async submitHandle() {
 

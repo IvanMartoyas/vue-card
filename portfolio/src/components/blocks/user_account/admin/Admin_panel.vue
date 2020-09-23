@@ -5,6 +5,9 @@
                 <li class="nav-item toolsBar__item" @click="vews_component = 'post'">
                     Посты
                 </li>
+                <li class="nav-item toolsBar__item" @click="vews_component = 'category'">
+                    Категории
+                </li>
                 <li class="nav-item toolsBar__item" @click="vews_component = 'user_role'">
                     Групповая политика
                 </li>
@@ -12,19 +15,22 @@
         </div>
         <div class="admin_panel__contentSide">
                 <Post       v-if="vews_component == 'post'"></Post>
+                <Category   v-if="vews_component == 'category'"></Category>
                 <User_role  v-if="vews_component == 'user_role'"></User_role>
         </div>
     </section>
 </template>
 
 <script>
-import Post from './a_components/Post'
+import Post from '@/components/blocks/post/Post'
+import Category from '@/components/blocks/category/Category'
 import User_role from "./a_components/User_list"
 
   export default {
     components: { 
         Post,
-        User_role
+        User_role,
+        Category
     },
     data() {
       return {

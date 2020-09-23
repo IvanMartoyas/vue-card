@@ -71,7 +71,6 @@
 
                 /*
                     text exit
-
                     login i@yandex.ru
                     password 123456
                 
