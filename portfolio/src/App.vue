@@ -56,7 +56,6 @@
       message() {
         return this.$store.getters.Massage
       }
-
     },
   }
 

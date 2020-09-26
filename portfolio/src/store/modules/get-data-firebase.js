@@ -6,16 +6,12 @@ export default {
             try {
                 const uid = await dispatch("getUserId");
 
-                console.log("uid User  "+ uid);
-                
                 if(uid == null) {
                     commit('setError', "Чтобы открыть полный доступ к сайту - зарегистрируйтесь. ");
                     return
                 }
                 
-
                 const info = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val();
-                console.log("info from fetchUser "+ info);
 
                 commit("setUserInfo", info);
             }
