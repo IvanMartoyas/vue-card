@@ -8,24 +8,31 @@
             </div>
             <button type="button" @click="createCategory" class="btn botton--green">Отправить</button>
         </form>
-        <form class="form_search_post">
+        <form v-if="loading" class="form_search_post">
             <div class="form-group">
                 <label for="exampleInputEmail1">Редактировать</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" v-model.lazy="$v.title.$model">
              </div>
             <button type="button"  class="btn botton--green">Отправить</button>
         </form>
+        <Loader v-else></Loader>
     </div>
 </template>
 
 
 <script>
     import {  maxLength  } from 'vuelidate/lib/validators'
+    import Loader from '@/components/blocks/Loaders/Loader.vue'
+
 
   export default {
+    components: {
+        Loader
+    },
     data() {
       return {
         title: '',
+        loading: true
       }
     },
     validations: {
@@ -33,7 +40,9 @@
           maxLength : 15
         },
     },
- 
+     mounted: {
+    //    this.loading = true
+    },
     methods: {
         async createCategory() {
             if(this.$v.$invalid) {
@@ -54,6 +63,7 @@
                 }
             }
         },
+        
 
     }
 }

@@ -26,7 +26,7 @@ export default new Vuex.Store({
 
       state.error = messages[fbError.code] || 'Что то пошло не так. ';
 
-      console.log(fbError)
+      // console.log(fbError)
       setTimeout(() => { state.error = ''}, 3000)
     },
     clearError(state) {

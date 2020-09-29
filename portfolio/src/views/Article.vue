@@ -62,9 +62,10 @@
 </template>
 
 <script>
- import listList from '@/components/portfolio/listList.vue'
- import tileList from '@/components/portfolio/tileList.vue'
- import pageList from '@/mixins/pagination.mixin'
+  import listList from '@/components/portfolio/listList.vue'
+  import tileList from '@/components/portfolio/tileList.vue'
+  import pageList from '@/mixins/pagination.mixin'
+  // import Loader from '@/components/blocks/Loaders/Loader.vue'
 
   export default {
     name: 'Portfolio',
