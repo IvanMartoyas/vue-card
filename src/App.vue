@@ -42,7 +42,7 @@
       // если пользователь не зарегистрирован то данные о нём не загружаю 
       
       if(!Object.keys(this.$store.getters.getUserInfo).length && await this.$store.dispatch("getUserId") != null) {
-        await this.$store.dispatch('fetchUser')
+        console.log(await this.$store.dispatch('fetchUser'))
       }
 
     },

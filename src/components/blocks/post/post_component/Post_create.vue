@@ -1,6 +1,6 @@
 <template>
 
-   <form @submit.prevent="submitCreatePost" ref="form_create_post"  method="post" enctype="multipart/form-data" class="card form_search_post">
+   <form @submit.prevent="submitCreatePost" method="post" enctype="multipart/form-data" class="card form_search_post">
         <div class="form-group">
             <label for="title1">Заголовок</label>
             <input type="text" class="form-control" id="title1" v-model.lazy="$v.title.$model" name="title" >
@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             <label for="File1">Выберите фото </label>
-            <input  class="form-control-file"  @change="onFileChange" v-model.lazy="$v.file.$model" name="file" id="File1"/>
+            <input  class="form-control-file"  v-model.lazy="$v.file.$model" name="file" id="File1"/>
             
             <small  class="btn form-text bg-danger text-light" v-if="$v.file.$dirty && !$v.file.required">Введите изображение.</small>
         </div>
@@ -50,6 +50,9 @@
                 file: ''
         }
     },
+    mounted() {
+        // console.log(this.$store.getters.getAllPosts)
+    },
     validations: {
         title: {
           required
@@ -66,15 +69,15 @@
         }
     },
     methods: {
-        onFileChange(e) {
-            // load image
-            let files = e.target.files || e.dataTransfer.files;
-            if (!files.length)
-                return;
-            // console.log("files "+files[0])
-            this.form.file = files[0]
-            console.log("file_size "+this.form.file.name )
-        }, 
+        // onFileChange(e) {
+        //     // load image
+        //     let files = e.target.files || e.dataTransfer.files;
+        //     if (!files.length)
+        //         return;
+        //     // console.log("files "+ files[0])
+        //     this.form.file = files[0]
+        //     console.log("file_size "+ this.form.file.name )
+        // }, 
         entrance_registration() {
             this.$emit('entrance_registration', false);
         },
@@ -92,11 +95,12 @@
                         file: this.file
                     });
 
+                    this.$v.$reset()
                     this.title = '';
                     this.quote =  '';
                     this.content =  '';
                     this.file =  '';
-                    this.$v.reset();
+
                 }
                 catch(e) {
                     console.log("errorl create post: "+ e);

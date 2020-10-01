@@ -19,7 +19,7 @@
         </div>
     </form>
 
-    <form v-if="select_post" @submit.prevent="submitUpdatePost"  method="post" enctype="multipart/form-data" class="card form_search_post mt-3">
+    <form  @submit.prevent="submitUpdatePost"  method="post" enctype="multipart/form-data" class="card form_search_post mt-3">
         <div class="form-group">
             <label for="title1">Заголовок</label>
             <input type="text" class="form-control" id="title1" v-model.lazy="$v.title.$model" name="title" >
@@ -43,7 +43,7 @@
 
         <div class="form-group">
             <label for="File1">Выберите фото </label>
-            <input type="file" class="form-control-file"  name="file" id="File1"/>
+            <input  class="form-control-file"  v-model.lazy="$v.file.$model" name="file" id="File1"/>
             
             <small  class="btn form-text bg-danger text-light" v-if="$v.file.$dirty && !$v.file.required">Введите изображение.</small>
         </div>
@@ -74,13 +74,11 @@
         select_post: false,
         loading: true,
         posts: [],
-        selected: ''
+        selected: null,
+
       }
     },
-    validations: {
-        find_post_id: {
-            required
-        },     
+    validations: {    
         title: {
           required
         },
@@ -92,27 +90,66 @@
           required
         },
         file: {
-          //  required, 
+           required, 
         }
     },
     async mounted() {
       
       this.posts = await this.$store.dispatch('fatchPosts')
-
+      const {id, title, quote, content, file} = this.posts[0];
+      this.selected = id
+      this.title = title
+      this.quote = quote
+      this.content = content
+      this.file = file
       this.loading = false
+
+    },
+    created() {
 
     },
     methods: {
         async submitUpdatePost() {
+          // console.log("click")
+          // не проходит проверка 
             if(this.$v.$invalid) {
                 this.$v.$touch();
                 return
-            }            
+            } 
+            try {
+              
+                await this.$store.dispatch('updatePost', {id: this.selected, title: this.title, quote: this.quote, content: this.content, file: this.file})
+                this.$store.dispatch("Massage","Пост успешно обновлён. ");
+                this.title = '';
+                this.quote = '';
+                this.content = '';
+                this.file = '';
+                this.$v.$reset()
+                
+                this.posts = await this.$store.dispatch('fatchPosts')
+                const {id, title, quote, content, file} = this.posts[0];
+                this.selected = id
+                this.title = title
+                this.quote = quote
+                this.content = content
+                this.file = file
+
+            } 
+            catch(e) {
+              console.log(e);
+            }        
         }
     },
     watch: {
-       selected() {
-         this.select_post = true
+          selected(value_id) {
+          const {id, title, quote, content, file} = this.posts.find(p => p.id === value_id);
+
+          this.selected = id
+          this.title = title
+          this.quote = quote
+          this.content = content
+          this.file = file
+
        }
     }
   }

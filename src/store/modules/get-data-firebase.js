@@ -16,8 +16,9 @@ export default {
 
                 const info = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val();
                 console.log("info from fetchUser "+ info);
-
                 commit("setUserInfo", info);
+
+                return info;
             }
             catch (e) {
     

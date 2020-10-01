@@ -17,8 +17,7 @@ export default {
         async Login({dispatch, commit}, {email, password}) {// eslint-disable-line no-unused-vars
             try{ 
                 await firebase.auth().signInWithEmailAndPassword(email, password);
-                await this.$store.dispatch('fetchUser');
-                location.reload();
+                await dispatch('fetchUser');
             }
             catch(e) {// eslint-disable-line no-useless-catch
                 commit('setError', e);
@@ -47,7 +46,8 @@ export default {
                 await firebase.database().ref(`/users/${uid}/info`).set({
                     name,
                     second_name,
-                    rights: "user"
+                    rights: "user",
+                    mail: email
                 })
 
             }
