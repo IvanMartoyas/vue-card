@@ -35,12 +35,12 @@
 
       <section class="container">
             <listList
-              :data_posts="pos"
+              :data_posts="post_data"
               v-if="views"
             ></listList>
 
             <tileList
-              :data_posts="pos"
+              :data_posts="post_data"
               v-else
             ></tileList>
       </section> 
@@ -62,8 +62,8 @@
 </template>
 
 <script>
-  import listList from '@/components/portfolio/listList.vue'
-  import tileList from '@/components/portfolio/tileList.vue'
+  import listList from '@/components/artikcle/listList.vue'
+  import tileList from '@/components/artikcle/tileList.vue'
   import pageList from '@/mixins/pagination.mixin'
   // import Loader from '@/components/blocks/Loaders/Loader.vue'
 
@@ -78,7 +78,8 @@
       return {
         views: true,
         SelectPosts: 10,
-        pos: {}
+        post_data: {},
+        posts: []
       }
     },
     methods: {
@@ -106,7 +107,21 @@
         console.log("pageNum "+ pageNum)
       }
     },
-    mounted() {
+     mounted() {
+
+
+         this.$store.dispatch("getAllPosts").then(response => {
+          this.post_data = response;
+        })
+
+/*
+  this.post_data = await this.$store.dispatch("getAllPosts")
+
+        console.log("this.post_data " +  this.post_data)
+        
+        */
+        console.log("this.post_data " +this.post_data)
+        
         this.getPostList()
     }
   }

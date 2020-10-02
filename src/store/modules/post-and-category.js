@@ -10,7 +10,7 @@ export default {
                 
                 autor.data = new Date().toString();
 
-                console.log("autor.data  "+autor.data )
+                // console.log("autor.data  "+autor.data )
                 const post = await firebase.database().ref(`/posts/`).push({
                     title,
                     quote, 
@@ -30,12 +30,19 @@ export default {
             try {
                 const uid = await dispatch("getUserId");
                 
-                let posts = (await firebase.database().ref(`/posts/`).once('value')).val() || {}
+                let data = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val() || {}
+                
+                let autor = data.name + " "+ data.second_name;
+                console.log("autor "+ autor);
 
-                // Object.keys превратит все вложненные обьекты в обьекте posts в один массив
-                // а forEach позволит пробежаться по этому массиву 
-                // где key это будет имя обьекта на выбранной итерации, это счётчик 
-                let new_posts = [];  
+                let posts = (await firebase.database().ref().child("posts").orderByChild("autor").equalTo(autor).once('value')).val() || {}    
+                
+                /* 
+                    Object.keys превратит все вложненные обьекты в обьекте posts в один массив
+                    а forEach позволит пробежаться по этому массиву 
+                    где key это будет имя обьекта на выбранной итерации, это счётчик 
+                */
+                 let new_posts = [];  
                 Object.keys(posts).forEach(key => {
                     new_posts.push({
                         title: posts[key].title,
@@ -43,6 +50,7 @@ export default {
                         content: posts[key].content,
                         file: posts[key].file,
                         data: posts[key].data,
+                        autor: posts[key].autor,
                         id: key
                     })
                 }) 
@@ -53,16 +61,38 @@ export default {
                 commit('setError', e);
             }
         },
+        async getAllPosts() { 
+            let posts = (await firebase.database().ref("/posts/").once('value')).val() || {}
+
+            let new_All_posts = []; 
+            Object.keys(posts).forEach(key => {
+
+                new_All_posts.push({
+                    title: posts[key].title,
+                    quote: posts[key].quote,
+                    content: posts[key].content,
+                    file: posts[key].file,
+                    autor: posts[key].autor,
+                    data: posts[key].data,
+                    id: key
+                })
+            });
+            
+            console.log(new_All_posts)
+
+            return new_All_posts;
+        },
         async updatePost({commit, dispatch }, data ) { // в data лежит обьект с данными  {id: this.selected, title: this.title, quote: this.quote, content: this.content, file: this.file} 
             try {
                 const uid = await dispatch("getUserId");
                 
-                await firebase.database().ref(`/users/${uid}/posts/`).child(data.id).update({
+                await firebase.database().ref(`/posts/`).child(data.id).update({
                     title: data.title, 
                     quote: data.quote,
                     content: data.content,
                     file: data.file,
-                    data: new Date()
+                    autor: data.autor,
+                    data: new Date().toString()
                 })
 
                 return true;
@@ -88,34 +118,13 @@ export default {
     mutations: {
     },
     state: {
-   
+
     },
     getters: {
-        async getAllPosts() {
-            let posts = (await firebase.database().ref(`/users/*/posts/`).once('value')).val() || {}
-                
-            // const postsss = (await firebase.database().ref(`/users/*/posts/`).once('value')).val() || {}
-            // console.log("postsss " + postsss);
-
-            
-
-            // let new_All_posts = []; 
-            // Object.keys(posts).forEach(key => {
-
-            //     new_All_posts.push({
-            //         title: posts[key].title,
-            //         quote: posts[key].quote,
-            //         content: posts[key].content,
-            //         file: posts[key].file,
-            //         id: key
-            //     })
-            // });
-            // console.log("new_All_posts "+new_All_posts);
-
-            Object.keys(posts).forEach(key => {
-                console.log("key "+key);
-            });
-            // return new_All_posts;
+        async getAllPosts({commit, dispatch }) {
+           
+        
+          
         }
     },
 }

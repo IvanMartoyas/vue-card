@@ -51,7 +51,8 @@
         }
     },
     mounted() {
-        // console.log(this.$store.getters.getAllPosts)
+   
+        // this.$store.dispatch("getAllPosts");
     },
     validations: {
         title: {
@@ -107,58 +108,6 @@
                 }
             }
 
-            // let formData = new FormData();
-
-            // formData.append("action", "create_post")
-            // formData.append("title", this.form.title)
-            // formData.append("quote", this.form.quote)
-            // formData.append("content", this.form.content)
-            // formData.append("keyWord", this.form.keyWord)
-            // formData.append('file', this.form.file) 
-            // console.log( "click")
-                // try {
-                //     axios({
-                //         method: 'post',
-                //          url: 'http://localhost:8080/admin_panel',
-                //         data: {
-                //             "action": "create_post",
-                //             "title": this.form.title,
-                //             "quote": this.form.quote,
-                //             "content": this.form.content,
-                //             "keyWord": this.form.keyWord,
-                //             // "file": this.form.file
-                //         }
-                        
-                //     }).then(function (response) {
-                //         // console.log(response.data.status);
-                //         // console.log(response.status);
-                //         // response.status
-                //         if(response.status == 200){
-                //             console.log('SUCCESS!!');
-                //             // router.push({ path: 'admin_panel' })
-                //         }
-                //     })
-                   
-
-                //     // await this.$store.dispatch('login', formData)
-
-                //     // console.log("sucsess")
-                // }
-                // catch(e) {
-                //     console.log("Error "+e)
-                // }
-            //  axios.post( 
-            //             'http://localhost:8080/admin_panel/img',
-            //             formData,
-            //             {
-            //                 headers: {
-            //                     'Content-Type': 'multipart/form-data'
-            //                 }
-            //             }
-            //         )
-            //         .then(function () {
-            //             console.log("sucsess")
-            //         }); 
 
         }
     }

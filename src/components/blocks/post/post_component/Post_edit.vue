@@ -71,6 +71,7 @@
         quote: '',
         content: '',
         file: '',
+        autor: '',
         select_post: false,
         loading: true,
         posts: [],
@@ -96,12 +97,14 @@
     async mounted() {
       
       this.posts = await this.$store.dispatch('fatchPosts')
-      const {id, title, quote, content, file} = this.posts[0];
+      // console.log("this.posts "+this.posts)
+      const {id, title, quote, content, file, autor} = this.posts[0];
       this.selected = id
       this.title = title
       this.quote = quote
       this.content = content
       this.file = file
+      this.autor = autor
       this.loading = false
 
     },
@@ -118,7 +121,14 @@
             } 
             try {
               
-                await this.$store.dispatch('updatePost', {id: this.selected, title: this.title, quote: this.quote, content: this.content, file: this.file})
+                await this.$store.dispatch('updatePost', {
+                  id: this.selected, 
+                  title: this.title, 
+                  quote: this.quote, 
+                  content: this.content, 
+                  file: this.file, 
+                  autor: this.autor
+                })
                 this.$store.dispatch("Massage","Пост успешно обновлён. ");
                 this.title = '';
                 this.quote = '';
@@ -127,12 +137,13 @@
                 this.$v.$reset()
                 
                 this.posts = await this.$store.dispatch('fatchPosts')
-                const {id, title, quote, content, file} = this.posts[0];
+                const {id, title, quote, content, file, autor} = this.posts[0];
                 this.selected = id
                 this.title = title
                 this.quote = quote
                 this.content = content
                 this.file = file
+                this.autor = autor
 
             } 
             catch(e) {
