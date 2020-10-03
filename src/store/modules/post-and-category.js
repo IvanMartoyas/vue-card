@@ -101,6 +101,15 @@ export default {
                 commit('setError', e);
             }
         },
+        async deletePost({commit}, id) {
+            try {
+                console.log("id "+ id)
+                await firebase.database().ref('posts/'+id).remove();
+            }
+            catch(e) {
+                commit('setError', e);
+            }
+        },
         async createCategory({commit, dispatch }, title) {
             try {
                 const uid = await dispatch("getUserId");

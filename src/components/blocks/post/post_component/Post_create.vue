@@ -52,7 +52,6 @@
     },
     mounted() {
    
-        // this.$store.dispatch("getAllPosts");
     },
     validations: {
         title: {
@@ -95,7 +94,7 @@
                         content: this.content,
                         file: this.file
                     });
-
+                this.$store.dispatch("Massage","Пост создан. ");
                     this.$v.$reset()
                     this.title = '';
                     this.quote =  '';
