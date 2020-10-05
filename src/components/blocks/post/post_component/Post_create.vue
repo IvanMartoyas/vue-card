@@ -78,9 +78,6 @@
         //     this.form.file = files[0]
         //     console.log("file_size "+ this.form.file.name )
         // }, 
-        entrance_registration() {
-            this.$emit('entrance_registration', false);
-        },
         async submitCreatePost() {
             if(this.$v.$invalid) {
                 this.$v.$touch();

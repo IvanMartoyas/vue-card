@@ -8,7 +8,9 @@ export default {
 
                 let autor = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val() || {}
                 
-                autor.data = new Date().toString();
+                let time = new Date();
+
+                autor.date = time.getHours()+":"+  time.getMinutes()+"  "+time.getDate()+"."+time.getMonth()+"."+time.getFullYear();
 
                 // console.log("autor.data  "+autor.data )
                 const post = await firebase.database().ref(`/posts/`).push({
@@ -17,7 +19,7 @@ export default {
                     content, 
                     file, 
                     autor: autor.name + " "+ autor.second_name,
-                    data: autor.data 
+                    date: autor.date 
                 })
 
                 return {title, quote, id: post.key, status: true}
@@ -49,13 +51,24 @@ export default {
                         quote: posts[key].quote,
                         content: posts[key].content,
                         file: posts[key].file,
-                        data: posts[key].data,
+                        date: posts[key].date,
                         autor: posts[key].autor,
                         id: key
                     })
                 }) 
                 // console.log(new_posts);
                 return new_posts;
+            }
+            catch(e) {
+                commit('setError', e);
+            }
+        },
+        async fatchPostsById({commit, dispatch }, id) {
+            try {
+
+                let post = (await firebase.database().ref(`/posts/`).child(id).once('value')).val() || {}
+
+                return {...post, id: id}
             }
             catch(e) {
                 commit('setError', e);
@@ -73,7 +86,7 @@ export default {
                     content: posts[key].content,
                     file: posts[key].file,
                     autor: posts[key].autor,
-                    data: posts[key].data,
+                    date: posts[key].date,
                     id: key
                 })
             });
@@ -92,7 +105,7 @@ export default {
                     content: data.content,
                     file: data.file,
                     autor: data.autor,
-                    data: new Date().toString()
+                    date: new Date().toString()
                 })
 
                 return true;

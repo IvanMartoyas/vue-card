@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Post from '@/components/blocks/post/Post'
+import Post from '@/components/blocks/post/Posts'
 import Category from '@/components/blocks/category/Category'
 import User_role from "./a_components/User_list"
 

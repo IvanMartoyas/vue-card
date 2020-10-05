@@ -1,6 +1,6 @@
 <template>
 
-    <form @submit.prevent="submitHandle">
+    <form @submit.prevent="submitHandle" class="h">
         <div class="form-group">
             <label for="exampleInputEmail1">Почта</label>
             <input type="email" class="form-control" id="exampleInputEmail1" v-model.lazy="$v.email.$model" aria-describedby="emailHelp">

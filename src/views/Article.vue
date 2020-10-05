@@ -1,23 +1,23 @@
 <template>
   <div class="portfolio">
 
-        <section class="container">
+      <section class="container">
         <div class="row">
             <div class="btn-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary" @click="views = !views"><i class="fa fa-list-ul fa-1x btn__icon" aria-hidden="true"></i>Списком </button>
-                <button type="button" class="btn btn-secondary" @click="views = !views"><i class="fa fa-th-large fa-1x btn__icon" aria-hidden="true"></i>Плиткой</button>
+                <button type="button" class="btn botton--green" @click="views = !views"><i class="fa fa-list-ul fa-1x btn__icon" aria-hidden="true"></i>Списком </button>
+                <button type="button" class="btn botton--green" @click="views = !views"><i class="fa fa-th-large fa-1x btn__icon" aria-hidden="true"></i>Плиткой</button>
             </div>
             <div class="btn-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-secondary" id="pagination_post">Пагинация  </button>
-              <button type="button" class="btn btn-secondary" id="pagination_list">Прокрутка</button>
+              <button type="button" class="btn botton--green" id="pagination_post">Пагинация  </button>
+              <button type="button" class="btn botton--green" id="pagination_list">Прокрутка</button>
             </div>
-            <b-dropdown class="btn-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4" role="group" text="Сортировка">
+            <b-dropdown class="btn-group botton--green bg-sucsess col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4" role="group" text="Сортировка">
               <b-dropdown-item><i class="fa fa-sort-amount-asc fa-1x btn__icon" aria-hidden="true"></i> <span>Выводить в обратном порядке</span></b-dropdown-item>
               <b-dropdown-item><i class="fa fa-leanpub fa-1x btn__icon" aria-hidden="true"></i>         <span>По алфавиту</span></b-dropdown-item>
               <b-dropdown-item><i class="fa fa-clock-o fa-1x btn__icon" aria-hidden="true"></i>         <span>По дате</span></b-dropdown-item>
             </b-dropdown>
 
-            <b-dropdown class="btn-group col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4" role="group" text="Количество постов">
+            <b-dropdown class="btn-group botton--green col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4" role="group" text="Количество постов">
 
               <!-- <b-dropdown-item
                 v-for="(item, i) in allItems " 
@@ -62,8 +62,8 @@
 </template>
 
 <script>
-  import listList from '@/components/artikcle/listList.vue'
-  import tileList from '@/components/artikcle/tileList.vue'
+  import listList from '@/components/articles/listList.vue'
+  import tileList from '@/components/articles/tileList.vue'
   import pageList from '@/mixins/pagination.mixin'
   // import Loader from '@/components/blocks/Loaders/Loader.vue'
 

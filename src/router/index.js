@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import auth from '../components/blocks/user_account/Auth.vue'
+import firebase from 'firebase/app'
 
 Vue.use(VueRouter)
 
@@ -63,7 +64,6 @@ Vue.use(VueRouter)
     name: 'registeristraion',
     meta: {layout: 'Main'},
     component: () => import('../components/blocks/user_form/RegisterVue.vue')
-    
   },
   {
     path: '/auth',
@@ -73,10 +73,16 @@ Vue.use(VueRouter)
 
   },
   {
+    path: '/articles/post/:id',
+    name: 'post',
+    meta: {layout: 'Empty'},
+    component: () => import('../components/blocks/post/post_component/Post.vue')
+  },
+  {
     path: '/admin_panel',
     name: 'admin_panel',
     props: true,
-    meta: {layout: 'Main'},
+    meta: {layout: 'Main', auth: true},
     component: () =>  import('@/components/blocks/user_account/admin/Admin_panel.vue')
   },
   {
@@ -88,10 +94,27 @@ Vue.use(VueRouter)
 
 ]
 
-const router = new VueRouter({
+const Router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
 
-export default router
+Router.beforeEach((to, from, next)=> {
+  /**
+   * to от кудя пришол роут
+   * from куда
+   * next вызывается после отработки роута
+   */
+  let currentUser = firebase.auth().currentUser;
+
+  let requeredAuth = to.matched.some(record => record.meta.auth)// вернёт значение auth
+
+  if(requeredAuth && !currentUser) {// если auth равен ture и пользователь не заригестрирован
+    next("/auth")
+  }
+  else {
+    next();
+  }
+})
+export default Router
