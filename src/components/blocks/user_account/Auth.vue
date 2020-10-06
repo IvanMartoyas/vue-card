@@ -1,6 +1,6 @@
 <template>
     <section >
-        <div class="center_align col-lg-8 col-md-7 col-sm-6 col-xs-12">
+        <div class="center_align col-lg-8 col-md-7 col-sm-6 col-xs-12 form">
 
             <h1 v-if="is_entrance" >Вход</h1> 
             <h1 class=" mt-5" v-else >Регистрация</h1> 
@@ -64,6 +64,9 @@
 
 </script> 
 
-<style>
+<style scoped>
 
+    .form {
+        margin-top: 100px;
+    }
 </style>

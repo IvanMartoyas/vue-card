@@ -3,6 +3,7 @@ import Paginate from 'vuejs-paginate'
 import Vuelidate from 'vuelidate'
 import axios from 'axios'
 import messagePlagin from '@/utils/modal_message.plagin'
+import GoTop from '@inotom/vue-go-top'
 import VueAxios from 'vue-axios'
 import App from './App.vue'
 import router from './router'
@@ -49,7 +50,8 @@ Vue.use(messagePlagin)// подлючаю плагин модальных око
 // pagination plagin
 Vue.component('paginate', Paginate)
 
-
+//scroll top
+Vue.use(GoTop);
 
 //css
 import '@/assets/css/main.css';

@@ -90,6 +90,9 @@
 </script>
 
 <style scoped>
+form {
+    min-height: calc(100vh - 360px);
+}
 .center_align {
     margin: 0 auto;
     margin-top: 50px;

@@ -8,9 +8,11 @@
          >
             <h5 class="card-title align-left">{{post.title}}</h5>
 
-            <div class="card__image" :style="{ backgroundImage: 'url('+ post.file +')'}">
-           
-            </div>
+            <!-- <div class="card__image" :style="{ backgroundImage: 'url('+ post.file +')'}"> -->
+               
+            <img class="card-img-top" :src="post.file" :alt="post.title">
+            <!-- </div> -->
+
             <p class="card-text align-left">{{post.quote}}</p>
             <div class="mt-2 mb-2">Дата: {{post.date }}</div>
             <button
@@ -26,14 +28,14 @@
 
 <script>
   export default {
-    name: 'listList',
+    name: 'ListList',
     data() {
       return {
      
       }
     },
     mounted() {
-      //  console.log("list select "+ this.data_posts. )
+
     },
     props: {
        data_posts: {},
@@ -41,7 +43,7 @@
   }
 </script>
 
-<style>
+<style scoped>
    .card-body {
       align-items: flex-start;
       border-radius: 0;

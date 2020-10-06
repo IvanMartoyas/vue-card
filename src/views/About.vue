@@ -158,6 +158,7 @@
       bottom: 0px;
       right: 20%;
       z-index: 1;
+      bottom: -4px;
   .carousel-caption
     p
       color: #fff

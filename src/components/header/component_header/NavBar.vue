@@ -1,5 +1,5 @@
 <template>
-   <b-navbar toggleable="lg" type="dark"  class="navbar_bg" >
+   <b-navbar toggleable="lg" type="dark"  class="bg-sucsess" >
         
      
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -15,10 +15,6 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-            <b-nav-form class="searche_site">
-                <b-form-input size="sm" class="mr-sm-2" placeholder="Искать..."></b-form-input>
-                <b-button size="sm" class="my-2 my-sm-0 fond_sub botton--green" type="submit">Поиск</b-button>
-            </b-nav-form>
             <div v-if="!name">  
                 <router-link to="/Auth" class="navbar_a" >
                     <svg class="userIcon" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -92,10 +88,6 @@
 </script>
 
 <style scoped>
-     .navbar_bg{ 
-        background: #224c52;
-     }
-
     a:hover {
          border: none
     }      
@@ -114,6 +106,14 @@
     }
     .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
         border: 0!important
+    }
+    .navbar-collapse {
+        margin: 0 -20px;
+        padding: 20px 0;
+        height: 60px;
+    }
+    nav {
+        padding: 0 30px
     }
     @media screen and (max-width: 761px) { 
         .userName{

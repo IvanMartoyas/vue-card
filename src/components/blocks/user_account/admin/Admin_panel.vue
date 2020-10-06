@@ -72,6 +72,7 @@ import User_role from "./a_components/User_list"
         display: flex;
         justify-content: space-between;
         padding: 30px 0;
+        min-height: calc(100vh - 160px);
    }
    .admin_panel__toolsBar {
        width: 400px;

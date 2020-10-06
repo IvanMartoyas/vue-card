@@ -12,6 +12,11 @@
     </component>
 
     <Footer></Footer>
+    <go-top
+    bg-color="#224c52"
+    :size="45"
+    >
+    </go-top>
   </div>
  
 </template>
@@ -23,7 +28,7 @@
   import MainWhidthLayout from  '@/layouts/Main-whidth-layout'
   import Header from            '@/components/header/Header'
   import Footer from            '@/components/footer/Footer'
-
+  import GoTop from '@inotom/vue-go-top';
   export default {
     name: 'Home',
     components: {
@@ -31,7 +36,8 @@
       MainWhidthLayout,
       MainLayout,
       EmptyLayout,
-      Footer
+      Footer,
+      GoTop
     },
     data() {
         return {
