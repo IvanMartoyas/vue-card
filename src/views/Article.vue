@@ -1,5 +1,5 @@
 <template>
-  <div class="portfolio">
+  <div class="article">
 
       <section class="container">
         <div class="row">
@@ -15,7 +15,7 @@
       </section> 
 
       <Loader v-if="loading"></Loader>
-      <section v-else class="container">
+      <section v-else class="container" :class="{sectionWithsScroll: !pagination_vuew}" @scroll="onScroll" >
             <ListList
               :data_posts="posts"
               v-if="views"
@@ -25,7 +25,10 @@
               :data_posts="posts"
               v-else
             ></TileList>
+            <div v-if="post_list_end" class="article__end mt-3 mb-3" > <b>Посты закончились.</b></div>
+            <Loader v-if="loading"></Loader>
       </section> 
+
       <section v-if="pagination_vuew" class="container">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -47,6 +50,7 @@
           </div>
         </div>
       </section>
+
   </div>
 </template>
 
@@ -68,14 +72,27 @@
       return {
         views: true,
         loading: true,
-        pagination_vuew: true
+        pagination_vuew: true,
       }
     },
     methods: {
       pagination:  function(pageNum) {
-        // this.getPostList(pageNum)
         this.page = pageNum;
         console.log("pageNum "+ pageNum)
+      },
+      onScroll(event) {
+        if(!this.pagination_vuew && !this.post_list_end) {// если включенна пагинация подклуткой
+
+          let bottom_list = event.target.firstElementChild.firstElementChild.getBoundingClientRect().bottom;
+
+          // console.log("bottom_list "+ bottom_list);
+
+          if (bottom_list < 700) {
+            //  console.log("докрутил до конца"  );
+
+            this.setLoadPost()
+          }
+        }
       }
     },
      mounted() {
@@ -86,17 +103,23 @@
 
           this.loading = false;
         })
-           //debugger; 
 
-        // this.getPostList()
     }
   }
 
 
 </script>
 <style>
-  .portfolio {
+  .article {
       margin-top: 50px;
   }
-
+  .sectionWithsScroll {
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    margin-bottom: 50px;
+  }
+  .article__end {
+    font-size: 18px;
+  }
 </style>

@@ -10,7 +10,7 @@ export default {
             pageCount: 0,//количество страниц
             all_items: [],// масив со всеми постами
             posts: [],// масив выбраных постов для отображения
-
+            post_list_end: false,// если true то посты кончелись и выводить нечего 
         }
     },
     methods: {
@@ -28,5 +28,20 @@ export default {
             this.$router.push(`${this.$route.path}?page=`+this.page)
             this.posts = this.all_items[this.page -1] || this.all_items[0];
         },
+        setLoadPost() {
+
+            let new_posts_array = this.all_items[this.page++] || [];
+
+            if(_.size(new_posts_array) != 0) {
+
+                this.posts = this.posts.concat(new_posts_array);
+                // debugger;
+                return true;
+            }
+            else {
+                this.post_list_end = true;
+                return false;
+            }
+        }
     },
 }
