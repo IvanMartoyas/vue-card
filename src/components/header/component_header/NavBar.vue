@@ -108,16 +108,20 @@
         border: 0!important
     }
     .navbar-collapse {
-        padding: 20px 0;
         min-height: 60px;
-        position: absolute;
         width: 100%;
-        top: 60px;
-        left: 0;
-        z-index: 999;
     }
     nav {
         /* padding: 0 30px */
+    }
+    @media screen and (max-width: 991px) {
+        .navbar-collapse {
+            padding: 20px 0;  
+            position: absolute;
+            top: 60px;
+            left: 0;
+            z-index: 999;
+        }
     }
     @media screen and (max-width: 761px) { 
         .userName{

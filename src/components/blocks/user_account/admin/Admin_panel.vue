@@ -5,12 +5,12 @@
                 <li class="nav-item toolsBar__item" @click="vews_component = 'post'">
                     Посты
                 </li>
-                <li class="nav-item toolsBar__item" @click="vews_component = 'category'">
+                <!-- <li class="nav-item toolsBar__item" @click="vews_component = 'category'">
                     Категории
                 </li>
                 <li class="nav-item toolsBar__item" @click="vews_component = 'user_role'">
                     Групповая политика
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="admin_panel__contentSide">
