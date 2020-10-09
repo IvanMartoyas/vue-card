@@ -6,11 +6,11 @@
 
         <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-            <b-nav-item ><router-link to="/" class="navbar_a">Главная</router-link></b-nav-item>
-            <b-nav-item ><router-link to="/Article" class="navbar_a">Статьи</router-link></b-nav-item>
-            <b-nav-item ><router-link to="/about"   class="navbar_a">О мне</router-link> </b-nav-item>
-            <b-nav-item ><router-link to="/contact" class="navbar_a">Контакты</router-link></b-nav-item>
-            <b-nav-item v-if="name"><router-link to="/Auth" class="navbar_a" >Личный кабинет </router-link></b-nav-item>
+            <b-nav-item ><router-link to="/" class="navbar_a link--light">Главная</router-link></b-nav-item>
+            <b-nav-item ><router-link to="/Article" class="navbar_a link--light ">Статьи</router-link></b-nav-item>
+            <b-nav-item ><router-link to="/about"   class="navbar_a link--light">О мне</router-link> </b-nav-item>
+            <b-nav-item ><router-link to="/contact" class="navbar_a link--light">Контакты</router-link></b-nav-item>
+            <b-nav-item v-if="name"><router-link to="/Auth" class="navbar_a link--light" >Личный кабинет </router-link></b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -108,12 +108,16 @@
         border: 0!important
     }
     .navbar-collapse {
-        margin: 0 -20px;
         padding: 20px 0;
-        height: 60px;
+        min-height: 60px;
+        position: absolute;
+        width: 100%;
+        top: 60px;
+        left: 0;
+        z-index: 999;
     }
     nav {
-        padding: 0 30px
+        /* padding: 0 30px */
     }
     @media screen and (max-width: 761px) { 
         .userName{

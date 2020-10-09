@@ -21,7 +21,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
   .nf {
     background-size: cover;
     background-size: cover;

@@ -35,7 +35,7 @@ export default {
                 let data = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val() || {}
                 
                 let autor = data.name + " "+ data.second_name;
-                console.log("autor "+ autor);
+                // console.log("autor "+ autor);
 
                 let posts = (await firebase.database().ref().child("posts").orderByChild("autor").equalTo(autor).once('value')).val() || {}    
                 

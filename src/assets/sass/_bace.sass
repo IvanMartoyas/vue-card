@@ -1,10 +1,13 @@
 $white: #e6e6e6
+$white--hover: #fff
 $white-light: #f7f7f7
 $red: #800d0d
 $green: #224c52
 $green--focus: #224c5266
 $green--overley: #224c52cc
+$green--hover: #1b3d42
 $black: #2c3e50
+$black--hover: #000
 $violet--darck: #3D0885
 $violet--light: #382452
 
@@ -14,15 +17,15 @@ $violet--light: #382452
 .white
     color: $white
     &:hover
-        color: $white
+        color: $white--hover
 .green 
     color: $green
     &:hover
-        color: $green
+        color: $green--hover
 .black
     color: $black
     &:hover
-        color: $black
+        color: $black--hover
 .bg-danger
     background-color: $red
 .bg-sucsess
@@ -70,22 +73,22 @@ div, p, b
     &--light 
         color: $white
         &:hover
-            color: $white
-            border-bottom: 1px solid $white
+            color: $white--hover
+            border-bottom: 1px solid $white--hover
             line-height: 1.3
             cursor: pointer
     &--darck
         color: $black
         &:hover
-            color: $black
-            border-bottom: 1px solid $black
+            color: $black--hover
+            border-bottom: 1px solid $black--hover
             line-height: 1.3
             cursor: pointer
     &--green
         color: $green
         &:hover
-            color: $green
-            border-bottom: 1px solid $green
+            color: $green--hover
+            border-bottom: 1px solid $green--hover
             line-height: 1.3
             cursor: pointer
 
